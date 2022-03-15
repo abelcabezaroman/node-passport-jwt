@@ -92,11 +92,13 @@ passport.use(
     )
 )
 
-// Esto es necesario para passport, necesita parsear el usuario
+// Esta función usará el usuario de req.LogIn para registrar su id.
 passport.serializeUser(function (user, done) {
     done(null, user._id);
 });
 
+
+// Esta función buscará un usuario dada su _id en la DB y populará req.user si existe
 passport.deserializeUser(async function (userId, done) {
     try {
         const existingUser = await User.findById(userId);
