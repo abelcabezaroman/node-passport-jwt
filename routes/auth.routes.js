@@ -32,7 +32,8 @@ router.post('/register', (req, res, next) => {
 });
 
 router.post('/login', (req, res, next) => {
-    passport.authenticate('login', (error, user) => {
+
+    const done = (error, user) => {
         if (error) return next(error)
 
         req.logIn(user, (error) => {
@@ -52,14 +53,19 @@ router.post('/login', (req, res, next) => {
                 { expiresIn: "1h" } // Determinamos el tiempo de expiración
             );
 
+            delete user.password;
+
             // Si no hay error, devolvemos al usuario logueado
             return res.status(200).json({
                 status: 200,
                 message: HTTPSTATUSCODE[200],
-                data: { token: token },
+                data: { user, token },
             })
         });
-    })(req);
+    }
+
+
+    passport.authenticate('login', done)(req);
 });
 
 

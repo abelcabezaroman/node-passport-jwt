@@ -9,7 +9,7 @@ const authRoutes = require('./routes/auth.routes');
 
 const PORT = 3000;
 const server = express();
-server.set("secretKey", "nodeRestApi");
+server.set("secretKey", "ABELCABEZAROMAN");
 
 server.use(express.json());
 server.use(express.urlencoded({ extended: false }));

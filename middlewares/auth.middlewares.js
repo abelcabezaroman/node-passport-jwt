@@ -13,6 +13,7 @@ const isAuth = (req, res, next) => {
         })
     }
 
+
     const splits = authorization.split(" ")//troceamos el token en dos partes
     //en la primera quitamos la palabra Bearer
     if( splits.length!=2 || splits[0]!="Bearer"){ //
